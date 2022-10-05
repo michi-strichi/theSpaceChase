@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,14 +9,22 @@ public class BoidManager : MonoBehaviour {
 
     public BoidSettings settings;
     public ComputeShader compute;
+    public Boolean m_followTarget = false;
+    public Transform m_target = null;
     Boid[] boids;
 
     void Start () {
         boids = FindObjectsOfType<Boid> ();
         foreach (Boid b in boids) {
-            b.Initialize (settings, null);
+            if (m_followTarget)
+            {
+                b.Initialize (settings, m_target);
+            }
+            else
+            {
+                b.Initialize (settings, null);
+            }
         }
-
     }
 
     void Update () {
