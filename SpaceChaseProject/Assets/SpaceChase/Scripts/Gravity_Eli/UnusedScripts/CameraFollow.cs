@@ -71,8 +71,8 @@ public class CameraFollow : MonoBehaviour
 
     public void Tick(float d)
     {
-        float h = Input.GetAxis("CamHorizontal");
-        float v = Input.GetAxis("CamVertical");
+        float h = Input.GetAxis("Mouse X");
+        float v = Input.GetAxis("Mouse Y");
         float rotateSpeed = MouseSpeed;
 
         HandleRotation(d, v, h, rotateSpeed);
