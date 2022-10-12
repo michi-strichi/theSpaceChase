@@ -31,14 +31,6 @@ public class FirstPersonController : MonoBehaviour
 
     void Update()
     {
-
-
-        // Look rotation:
-        //JITTER REASON HERE:
-        //transform.Rotate(transform.up * Input.GetAxis("Mouse X") * Time.deltaTime * mouseSensitivityX);
-         //<--
-        //transform.localEulerAngles *= Input.GetAxis("Mouse X") * mouseSensitivityX;
-        // 
         
         verticalLookRotation += Input.GetAxis("Mouse Y") * mouseSensitivityY;
         verticalLookRotation = Mathf.Clamp(verticalLookRotation, -60, 60);
