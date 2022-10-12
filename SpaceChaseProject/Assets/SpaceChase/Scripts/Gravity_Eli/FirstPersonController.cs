@@ -7,7 +7,6 @@ using System.Text;
 public class FirstPersonController : MonoBehaviour
 {
     // public vars
-    public float mouseSensitivityX = 1;
     public float mouseSensitivityY = 1;
     public float walkSpeed = 6;
     public float jumpForce = 220;
@@ -32,11 +31,13 @@ public class FirstPersonController : MonoBehaviour
 
     void Update()
     {
-        
-        
+
+
         // Look rotation:
         //JITTER REASON HERE:
-        transform.Rotate(Vector3.up * Input.GetAxis("Mouse X") * mouseSensitivityX);//<--
+        //transform.Rotate(transform.up * Input.GetAxis("Mouse X") * Time.deltaTime * mouseSensitivityX);
+         //<--
+        //transform.localEulerAngles *= Input.GetAxis("Mouse X") * mouseSensitivityX;
         // 
         
         verticalLookRotation += Input.GetAxis("Mouse Y") * mouseSensitivityY;
