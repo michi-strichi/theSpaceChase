@@ -6,17 +6,25 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
-    void StartGame(String gameMode)
+    public void StartSingleplayer(String difficulty)
     {
-        if (gameMode == "Singleplayer")
+        Debug.Log("Started Singleplayer Game");
+        switch (difficulty)
         {
-            Debug.Log("Starting Singleplayer");
-            
-            // load new scene here
-        } else if (gameMode == "Multiplayer")
-        {
-            Debug.Log("Starting Multiplayer");
-            // load new scene here
+            case "easy":
+                break;
+            case "normal":
+                break;
+            case "hard":
+                break;
+            default:
+                Debug.Log("No string given in function call! pass 'easy', 'normal' or 'hard'");
+                break;
         }
+    }
+
+    public void StartMultiplayer()
+    {
+        Debug.Log("Started Multiplayer Game");
     }
 }
