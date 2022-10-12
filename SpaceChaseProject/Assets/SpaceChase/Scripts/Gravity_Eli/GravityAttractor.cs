@@ -1,15 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using System.Collections;
+using System.Diagnostics;
+using Debug = UnityEngine.Debug;
 
 public class GravityAttractor : MonoBehaviour
 {
-    public void Attract(Transform body, float gravity)
-    {
-        Vector3 targetDir = (body.position - transform.position).normalized;
-        Vector3 bodyUp = body.up;
+    public float mouseSensitivityX = 20;
+    public float gravity = 0f;
 
-        body.rotation = Quaternion.FromToRotation(bodyUp, targetDir) * body.rotation;
-        body.GetComponent<Rigidbody>().AddForce(targetDir * gravity,ForceMode.Force);
+    public void Attract(Rigidbody body)
+    {
+        Vector3 gravityUp = (body.position - transform.position).normalized;
+        Vector3 localUp = body.transform.up;
+
+        // Apply downwards gravity to body
+        body.AddForce(gravityUp * gravity);
+        // Allign bodies up axis with the centre of planet
+        body.rotation = Quaternion.FromToRotation(localUp, gravityUp) * body.rotation * Quaternion.Euler(0, Input.GetAxis("Mouse X") * mouseSensitivityX, 0);
     }
 }

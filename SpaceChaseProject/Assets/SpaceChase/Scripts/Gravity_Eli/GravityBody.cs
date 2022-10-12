@@ -1,31 +1,37 @@
-using System;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 public class GravityBody : MonoBehaviour
 {
-    private GameObject[] planets;
-    private List<GravityAttractor> planetGravityAttractors = new List<GravityAttractor>();
+    GameObject[] planets;
+    Rigidbody rigidbody;
+    private List<GravityAttractor> _attractors = new List<GravityAttractor>();
 
-    private void Awake()
+    void Awake()
     {
         planets = GameObject.FindGameObjectsWithTag("Planet");
-        foreach (GameObject planet in planets)
+        foreach (var planet in planets)
         {
-            var gravityAttractor = planet.GetComponent<GravityAttractor>();
-            planetGravityAttractors.Add(gravityAttractor);
+            _attractors.Add(planet.GetComponent<GravityAttractor>());
         }
+
+        rigidbody = GetComponent<Rigidbody>();
+        
+        rigidbody.useGravity = false;
+        rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
-        for (int i = 0; i < planetGravityAttractors.Count; i++)
+        // Allow this body to be influenced by planet's gravity
+        foreach (var attractor in _attractors)
         {
-            var distance = (planets[i].transform.position - gameObject.transform.position).magnitude;
-            var gravity = -(1/distance)*500;
-            planetGravityAttractors[i].Attract(transform, gravity);
+            if (attractor.gravity < 0)
+            {
+                attractor.Attract(rigidbody);
+            }
         }
     }
 }
