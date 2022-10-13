@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class PlayerBoidCollision : MonoBehaviour
 {
+    public SceneManagerSingleplayer sceneManager;
     private void OnCollisionEnter(Collision c)
     {
         if (c.gameObject.tag == "Boid")
         {
-            Debug.Log("Collided with boid!!");
+            sceneManager.GameOver();
         }
 
     }
