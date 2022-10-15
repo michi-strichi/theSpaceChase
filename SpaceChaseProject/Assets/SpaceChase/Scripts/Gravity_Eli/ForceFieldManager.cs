@@ -9,7 +9,7 @@ public class ForceFieldManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        planet.GetComponent<GravityAttractor>().gravity = -60f;
+        planet.GetComponent<GravityAttractor>().gravity = -80f;
     }
     
     private void OnTriggerExit(Collider other)
