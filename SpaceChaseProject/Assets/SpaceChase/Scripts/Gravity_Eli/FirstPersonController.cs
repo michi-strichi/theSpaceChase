@@ -13,6 +13,7 @@ public class FirstPersonController : MonoBehaviour
     public float jumpForce = 220;
     public LayerMask groundedMask;
     public SceneManagerSingleplayer sceneManager;
+    private float shiftMultiplier = 1.0f;
 
     // System vars
     bool grounded = true;
@@ -54,9 +55,19 @@ public class FirstPersonController : MonoBehaviour
             {
                 if (grounded)
                 {
-                    rigidbody.AddForce(transform.forward * 2f * jumpForce);
+                    Vector3 jumpDir = transform.forward * 2f + transform.up / 2;
+                    rigidbody.AddForce(jumpDir * jumpForce);
                     grounded = false;
                 }
+            }
+
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                shiftMultiplier = 2.0f;
+            }
+            else if (Input.GetKeyUp(KeyCode.LeftShift))
+            {
+                shiftMultiplier = 1.0f;
             }
         }
     }
@@ -73,9 +84,8 @@ public class FirstPersonController : MonoBehaviour
     {
         if (sceneManager.IsPlaying())
         {
-            // Apply movement to rigidbody
             Vector3 localMove = transform.TransformDirection(moveAmount) * Time.fixedDeltaTime;
-            rigidbody.MovePosition(rigidbody.position + localMove);
+            rigidbody.MovePosition(rigidbody.position + localMove * shiftMultiplier);
         }
     }
 }

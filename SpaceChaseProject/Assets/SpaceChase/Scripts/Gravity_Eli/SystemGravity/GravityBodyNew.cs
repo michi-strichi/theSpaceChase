@@ -29,7 +29,15 @@ public class GravityBodyNew : MonoBehaviour
         for (int i = 0; i < planets.Length; i++)
         {
             _planetsDistance.Add(Vector3.Distance(transform.position, planets[i].transform.position));
-            _attractors[i].Attract(rigidbody, -1 / _planetsDistance[i] * 750);
+            float gravity = -1 / _planetsDistance[i] * 750;
+            
+            /*if (gravity > -5f)
+            {
+                gravity = -5f;
+            }
+            Debug.Log(gravity);*/
+            
+            _attractors[i].Attract(rigidbody, gravity);
         }
         
         float minVal = _planetsDistance.Min();
