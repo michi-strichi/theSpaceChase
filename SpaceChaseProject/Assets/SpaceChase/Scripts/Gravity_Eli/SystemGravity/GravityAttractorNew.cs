@@ -23,6 +23,6 @@ public class GravityAttractorNew : MonoBehaviour
         Vector3 localUp = body.transform.up;
         Quaternion newRotation = Quaternion.FromToRotation(localUp, gravityUp) * body.rotation *
                                  Quaternion.Euler(0, Input.GetAxis("Mouse X") * mouseSensitivityX, 0);
-        body.rotation = Quaternion.Lerp(body.transform.rotation, newRotation, 0.8f);
+        body.rotation = Quaternion.Lerp(body.rotation, newRotation, 0.1f);
     }
 }

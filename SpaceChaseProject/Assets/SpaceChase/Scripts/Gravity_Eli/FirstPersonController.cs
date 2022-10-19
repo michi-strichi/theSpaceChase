@@ -54,8 +54,7 @@ public class FirstPersonController : MonoBehaviour
             {
                 if (grounded)
                 {
-                    Vector3 jumpdirection = transform.forward * 5 + transform.up;
-                    rigidbody.AddForce(transform.forward * 2 * jumpForce);
+                    rigidbody.AddForce(transform.forward * 2f * jumpForce);
                     grounded = false;
                 }
             }
