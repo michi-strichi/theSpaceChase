@@ -29,9 +29,9 @@ public class GravityBodyNew : MonoBehaviour
         for (int i = 0; i < planets.Length; i++)
         {
             _planetsDistance.Add(Vector3.Distance(transform.position, planets[i].transform.position));
-            _attractors[i].Attract(rigidbody, -1 / _planetsDistance[i] * 600);
+            _attractors[i].Attract(rigidbody, -1 / _planetsDistance[i] * 750);
         }
-
+        
         float minVal = _planetsDistance.Min();
         int index = _planetsDistance.IndexOf(minVal);
         _attractors[index].Reorient(rigidbody);
