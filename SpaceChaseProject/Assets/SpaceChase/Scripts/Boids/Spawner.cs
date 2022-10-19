@@ -1,25 +1,33 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Spawner : MonoBehaviour {
 
     public enum GizmoType { Never, SelectedOnly, Always }
+    
+    public Boolean enabled = true;
 
     public Boid prefab;
     public float spawnRadius = 10;
     public int spawnCount = 10;
     public Color colour;
     public GizmoType showSpawnRegion;
+    
 
     void Awake () {
-        for (int i = 0; i < spawnCount; i++) {
-            Vector3 pos = transform.position + Random.insideUnitSphere * spawnRadius;
-            Boid boid = Instantiate (prefab);
-            boid.transform.position = pos;
-            boid.transform.forward = Random.insideUnitSphere;
+        if (enabled)
+        {
+            for (int i = 0; i < spawnCount; i++) {
+                Vector3 pos = transform.position + Random.insideUnitSphere * spawnRadius;
+                Boid boid = Instantiate (prefab);
+                boid.transform.position = pos;
+                boid.transform.forward = Random.insideUnitSphere;
 
-            //boid.SetColour (colour);
+                //boid.SetColour (colour);
+            }   
         }
     }
 
