@@ -177,11 +177,10 @@ GameObject:
   - component: {fileID: 5601484054515618613}
   - component: {fileID: 5601484054515618610}
   - component: {fileID: 5601484054515618611}
-  - component: {fileID: 5601484054515618608}
-  - component: {fileID: 5601484054515618601}
   - component: {fileID: 1516752568319399301}
+  - component: {fileID: 5388652617454408276}
   m_Layer: 0
-  m_Name: Player
+  m_Name: PlayerMultiplayer
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -296,38 +295,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e35103716ec78c548a0ab463b1c02003, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5601484054515618608
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5601484054515618609}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19fb93875b2747146b6ee2a460a78b01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mouseSensitivityY: 1
-  walkSpeed: 6
-  jumpForce: 1750
-  groundedMask:
-    serializedVersion: 2
-    m_Bits: 0
-  sceneManager: {fileID: 0}
---- !u!114 &5601484054515618601
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5601484054515618609}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab4c2ae5b9195d94e97aa2ec7492c5f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneManager: {fileID: 0}
 --- !u!114 &1516752568319399301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -344,6 +311,25 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!114 &5388652617454408276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5601484054515618609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fdacc51fdc0d9647abfc0d8b48afc3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseSensitivityY: 1
+  walkSpeed: 6
+  jumpForce: 1750
+  groundedMask:
+    serializedVersion: 2
+    m_Bits: 0
+  sceneManager: {fileID: 0}
 --- !u!1 &5601484054871176638
 GameObject:
   m_ObjectHideFlags: 0
