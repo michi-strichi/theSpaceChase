@@ -13,6 +13,7 @@ public class Minimap : MonoBehaviour
 
     private List<Transform> gamePlanets = new List<Transform>();
     private List<Transform> miniPlanets;
+    private GameObject miniPlayer;
 
     void Start()
     {
@@ -30,18 +31,19 @@ public class Minimap : MonoBehaviour
         }
         
         // create mini player at correct position in ui
-        var miniPlayer = Instantiate(miniPlayerPrefab);
+        miniPlayer = Instantiate(miniPlayerPrefab);
         miniPlayer.transform.localPosition = gamePlayer.localPosition;
         miniPlayer.transform.parent = transform;
-        
-        
         
         transform.localScale *= 0.006f;
     }
 
     private void Update()
     {
+        miniPlayer.transform.localPosition = gamePlayer.transform.position;
         transform.position = minimapPosition.position;
+
+
     }
     
 }
