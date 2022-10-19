@@ -35,12 +35,11 @@ public class FirstPersonController : MonoBehaviour
     {
         if (sceneManager.IsPlaying())
         {
-                  
             verticalLookRotation += Input.GetAxis("Mouse Y") * mouseSensitivityY;
             verticalLookRotation = Mathf.Clamp(verticalLookRotation, -40, -10);
             cameraTransform.localEulerAngles = Vector3.left * verticalLookRotation;
-        
-        
+
+
             // Calculate movement:
             float inputX = Input.GetAxisRaw("Horizontal");
             float inputY = Input.GetAxisRaw("Vertical");
@@ -55,12 +54,12 @@ public class FirstPersonController : MonoBehaviour
             {
                 if (grounded)
                 {
-                    rigidbody.AddForce(transform.up * jumpForce);
+                    Vector3 jumpdirection = transform.forward * 5 + transform.up;
+                    rigidbody.AddForce(transform.forward * 2 * jumpForce);
                     grounded = false;
                 }
             }
         }
-  
     }
 
     private void OnCollisionEnter(Collision other)
@@ -79,6 +78,5 @@ public class FirstPersonController : MonoBehaviour
             Vector3 localMove = transform.TransformDirection(moveAmount) * Time.fixedDeltaTime;
             rigidbody.MovePosition(rigidbody.position + localMove);
         }
-
     }
 }
