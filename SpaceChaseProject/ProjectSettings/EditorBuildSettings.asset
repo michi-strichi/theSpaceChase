@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/SpaceChase/Scenes/FINAL/MainMenu.unity
     guid: b24b1fc5f59b700479f16fa52568ad0c
   - enabled: 1
-    path: Assets/SpaceChase/Scenes/FINAL/Singleplayer.unity
+    path: Assets/SpaceChase/Scenes/FINAL/MultiPlayer.unity
     guid: 023865500bd76b340a114269c1b969ae
   m_configObjects: {}

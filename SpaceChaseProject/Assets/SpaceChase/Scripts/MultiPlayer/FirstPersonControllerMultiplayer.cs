@@ -5,14 +5,14 @@ using System.Text;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(GravityBody))]
-public class FirstPersonController : MonoBehaviour
+public class FirstPersonControllerMultiplayer : MonoBehaviour
 {
     // public vars
     public float mouseSensitivityY = 1;
     public float walkSpeed = 6;
     public float jumpForce = 220;
     public LayerMask groundedMask;
-    public SceneManagerSingleplayer sceneManager;
+    public SceneManagerMultiplayer sceneManager;
 
     // System vars
     bool grounded = true;
@@ -25,6 +25,7 @@ public class FirstPersonController : MonoBehaviour
 
     void Awake()
     {
+        sceneManager = GameObject.FindWithTag("SceneManager").GetComponent<SceneManagerMultiplayer>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         cameraTransform = Camera.main.transform;
@@ -35,11 +36,12 @@ public class FirstPersonController : MonoBehaviour
     {
         if (sceneManager.IsPlaying())
         {
+                  
             verticalLookRotation += Input.GetAxis("Mouse Y") * mouseSensitivityY;
             verticalLookRotation = Mathf.Clamp(verticalLookRotation, -40, -10);
             cameraTransform.localEulerAngles = Vector3.left * verticalLookRotation;
-
-
+        
+        
             // Calculate movement:
             float inputX = Input.GetAxisRaw("Horizontal");
             float inputY = Input.GetAxisRaw("Vertical");
@@ -54,11 +56,12 @@ public class FirstPersonController : MonoBehaviour
             {
                 if (grounded)
                 {
-                    rigidbody.AddForce(transform.forward * 2f * jumpForce);
+                    rigidbody.AddForce(transform.up * jumpForce);
                     grounded = false;
                 }
             }
         }
+  
     }
 
     private void OnCollisionEnter(Collision other)
@@ -77,5 +80,6 @@ public class FirstPersonController : MonoBehaviour
             Vector3 localMove = transform.TransformDirection(moveAmount) * Time.fixedDeltaTime;
             rigidbody.MovePosition(rigidbody.position + localMove);
         }
+
     }
 }
