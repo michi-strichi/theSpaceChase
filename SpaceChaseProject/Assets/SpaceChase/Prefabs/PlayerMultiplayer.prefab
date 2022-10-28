@@ -176,9 +176,9 @@ GameObject:
   - component: {fileID: 5601484054515618612}
   - component: {fileID: 5601484054515618613}
   - component: {fileID: 5601484054515618610}
-  - component: {fileID: 5601484054515618611}
   - component: {fileID: 1516752568319399301}
   - component: {fileID: 5388652617454408276}
+  - component: {fileID: -348259099837674928}
   m_Layer: 0
   m_Name: PlayerMultiplayer
   m_TagString: Player
@@ -283,18 +283,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &5601484054515618611
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5601484054515618609}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e35103716ec78c548a0ab463b1c02003, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1516752568319399301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,6 +318,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   sceneManager: {fileID: 0}
+--- !u!114 &-348259099837674928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5601484054515618609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71f30c432955d864b8f9f9b3abf1781d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5601484054871176638
 GameObject:
   m_ObjectHideFlags: 0

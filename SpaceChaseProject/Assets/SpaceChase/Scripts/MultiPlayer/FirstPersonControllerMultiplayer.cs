@@ -4,7 +4,7 @@ using System.Collections;
 using System.Text;
 using UnityEngine.SceneManagement;
 
-[RequireComponent(typeof(GravityBody))]
+[RequireComponent(typeof(GravityBodyNewMultiplayer))]
 public class FirstPersonControllerMultiplayer : MonoBehaviour
 {
     // public vars
