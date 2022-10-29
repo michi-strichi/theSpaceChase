@@ -2,10 +2,11 @@ using System;
 using UnityEngine;
 using System.Collections;
 using System.Text;
+using Unity.Netcode;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(GravityBodyNewMultiplayer))]
-public class FirstPersonControllerMultiplayer : MonoBehaviour
+public class FirstPersonControllerMultiplayer : NetworkBehaviour
 {
     // public vars
     public float mouseSensitivityY = 1;
@@ -36,6 +37,10 @@ public class FirstPersonControllerMultiplayer : MonoBehaviour
     {
         if (sceneManager.IsPlaying())
         {
+            if (!IsOwner)
+            {
+                return;
+            }
                   
             verticalLookRotation += Input.GetAxis("Mouse Y") * mouseSensitivityY;
             verticalLookRotation = Mathf.Clamp(verticalLookRotation, -40, -10);

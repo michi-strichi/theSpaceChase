@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/SpaceChase/Scenes/Gravity_Eli.unity
     guid: 72d795efab2e8cb44b7e62418cc13679
-  - enabled: 1
+  - enabled: 0
     path: Assets/SpaceChase/Scenes/FINAL/MainMenu.unity
     guid: b24b1fc5f59b700479f16fa52568ad0c
   - enabled: 1
