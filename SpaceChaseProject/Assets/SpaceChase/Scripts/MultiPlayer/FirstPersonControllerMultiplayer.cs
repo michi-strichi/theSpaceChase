@@ -14,6 +14,7 @@ public class FirstPersonControllerMultiplayer : NetworkBehaviour
     public float jumpForce = 220;
     public LayerMask groundedMask;
     public SceneManagerMultiplayer sceneManager;
+    public Camera cam;
 
     // System vars
     bool grounded = true;
@@ -37,36 +38,54 @@ public class FirstPersonControllerMultiplayer : NetworkBehaviour
     {
         if (sceneManager.IsPlaying())
         {
+            //Doesn't execute anything if client isn't owner of the script, prevents other players from controlling your character
             if (!IsOwner)
             {
                 return;
             }
-                  
-            verticalLookRotation += Input.GetAxis("Mouse Y") * mouseSensitivityY;
-            verticalLookRotation = Mathf.Clamp(verticalLookRotation, -40, -10);
-            cameraTransform.localEulerAngles = Vector3.left * verticalLookRotation;
-        
-        
-            // Calculate movement:
-            float inputX = Input.GetAxisRaw("Horizontal");
-            float inputY = Input.GetAxisRaw("Vertical");
+            // Calculate movement, rotation and Jump Vectors:
+            CameraRotation();
+            Move();
+            Jump();
+        }
+    }
 
-            Vector3 moveDir = new Vector3(inputX, 0, inputY).normalized;
-            Vector3 targetMoveAmount = moveDir * walkSpeed;
-            moveAmount = Vector3.SmoothDamp(moveAmount, targetMoveAmount, ref smoothMoveVelocity, .15f);
+    private void CameraRotation()
+    {
+        verticalLookRotation += Input.GetAxis("Mouse Y") * mouseSensitivityY;
+        verticalLookRotation = Mathf.Clamp(verticalLookRotation, -40, -10);
+        cameraTransform.localEulerAngles = Vector3.left * verticalLookRotation;
+    }
 
+    private void Move()
+    {
+        float inputX = Input.GetAxisRaw("Horizontal");
+        float inputY = Input.GetAxisRaw("Vertical");
 
-            // Jump
-            if (Input.GetButtonDown("Jump"))
+        Vector3 moveDir = new Vector3(inputX, 0, inputY).normalized;
+        Vector3 targetMoveAmount = moveDir * walkSpeed;
+        moveAmount = Vector3.SmoothDamp(moveAmount, targetMoveAmount, ref smoothMoveVelocity, .15f);
+    }
+
+    private void Jump()
+    {
+        if (Input.GetButtonDown("Jump"))
+        {
+            if (grounded)
             {
-                if (grounded)
-                {
-                    rigidbody.AddForce(transform.up * jumpForce);
-                    grounded = false;
-                }
+                rigidbody.AddForce(transform.up * jumpForce);
+                grounded = false;
             }
         }
-  
+    }
+    
+    public override void OnNetworkSpawn()
+    {
+        if (IsOwner)
+        {
+            cam.gameObject.SetActive(true);
+            enabled = true;
+        }
     }
 
     private void OnCollisionEnter(Collision other)
