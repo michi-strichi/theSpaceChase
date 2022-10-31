@@ -2,10 +2,12 @@ using System;
 using UnityEngine;
 using System.Collections;
 using System.Text;
+using Cinemachine;
+using Unity.Netcode;
 using UnityEngine.SceneManagement;
 
-[RequireComponent(typeof(GravityBody))]
-public class FirstPersonControllerMultiplayer : MonoBehaviour
+[RequireComponent(typeof(GravityBodyNewMultiplayer))]
+public class FirstPersonControllerMultiplayer : NetworkBehaviour
 {
     // public vars
     public float mouseSensitivityY = 1;
@@ -13,14 +15,17 @@ public class FirstPersonControllerMultiplayer : MonoBehaviour
     public float jumpForce = 220;
     public LayerMask groundedMask;
     public SceneManagerMultiplayer sceneManager;
+    public CinemachineVirtualCamera virtualCamera;
 
     // System vars
     bool grounded = true;
     Vector3 moveAmount;
     Vector3 smoothMoveVelocity;
     float verticalLookRotation;
-    Transform cameraTransform;
+    //Transform cameraTransform;
     Rigidbody rigidbody;
+    private Vector2 maxFollowoffset = new Vector2(-1f, 3f);
+    private CinemachineTransposer transposer;
 
 
     void Awake()
@@ -28,7 +33,7 @@ public class FirstPersonControllerMultiplayer : MonoBehaviour
         sceneManager = GameObject.FindWithTag("SceneManager").GetComponent<SceneManagerMultiplayer>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        cameraTransform = Camera.main.transform;
+        //cameraTransform = Camera.main.transform;
         rigidbody = GetComponent<Rigidbody>();
     }
 
@@ -36,32 +41,62 @@ public class FirstPersonControllerMultiplayer : MonoBehaviour
     {
         if (sceneManager.IsPlaying())
         {
-                  
-            verticalLookRotation += Input.GetAxis("Mouse Y") * mouseSensitivityY;
-            verticalLookRotation = Mathf.Clamp(verticalLookRotation, -40, -10);
-            cameraTransform.localEulerAngles = Vector3.left * verticalLookRotation;
-        
-        
-            // Calculate movement:
-            float inputX = Input.GetAxisRaw("Horizontal");
-            float inputY = Input.GetAxisRaw("Vertical");
-
-            Vector3 moveDir = new Vector3(inputX, 0, inputY).normalized;
-            Vector3 targetMoveAmount = moveDir * walkSpeed;
-            moveAmount = Vector3.SmoothDamp(moveAmount, targetMoveAmount, ref smoothMoveVelocity, .15f);
-
-
-            // Jump
-            if (Input.GetButtonDown("Jump"))
+            //Doesn't execute anything if client isn't owner of the script, prevents other players from controlling your character
+            if (!IsOwner)
             {
-                if (grounded)
-                {
-                    rigidbody.AddForce(transform.up * jumpForce);
-                    grounded = false;
-                }
+                return;
+            }
+            // Calculate movement, rotation and Jump Vectors:
+            CameraRotation();
+            Move();
+            Jump();
+        }
+    }
+
+    private void CameraRotation()
+    {
+        /*
+        verticalLookRotation += Input.GetAxis("Mouse Y") * mouseSensitivityY;
+        verticalLookRotation = Mathf.Clamp(verticalLookRotation, -40, -10);
+        cameraTransform.localEulerAngles = Vector3.left * verticalLookRotation;
+        */
+
+        float followOffset = Mathf.Clamp(transposer.m_FollowOffset.y - 
+                                         (Input.GetAxis("Mouse Y") * mouseSensitivityY * Time.deltaTime),
+            maxFollowoffset.x, maxFollowoffset.y);
+        transposer.m_FollowOffset.y = followOffset;
+    }
+
+    private void Move()
+    {
+        float inputX = Input.GetAxisRaw("Horizontal");
+        float inputY = Input.GetAxisRaw("Vertical");
+
+        Vector3 moveDir = new Vector3(inputX, 0, inputY).normalized;
+        Vector3 targetMoveAmount = moveDir * walkSpeed;
+        moveAmount = Vector3.SmoothDamp(moveAmount, targetMoveAmount, ref smoothMoveVelocity, .15f);
+    }
+
+    private void Jump()
+    {
+        if (Input.GetButtonDown("Jump"))
+        {
+            if (grounded)
+            {
+                rigidbody.AddForce(transform.up * jumpForce);
+                grounded = false;
             }
         }
-  
+    }
+    
+    public override void OnNetworkSpawn()
+    {
+        if (IsOwner)
+        {
+            transposer = virtualCamera.GetCinemachineComponent<CinemachineTransposer>();
+            virtualCamera.gameObject.SetActive(true);
+            enabled = true;
+        }
     }
 
     private void OnCollisionEnter(Collision other)

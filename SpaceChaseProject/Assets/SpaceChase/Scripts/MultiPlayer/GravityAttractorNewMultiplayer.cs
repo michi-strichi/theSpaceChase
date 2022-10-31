@@ -1,11 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GravityAttractorNew : MonoBehaviour
+public class GravityAttractorNewMultiplayer : MonoBehaviour
 {
     public float mouseSensitivityX = 20;
-    public SceneManagerSingleplayer sceneManager;
+    public SceneManagerMultiplayer sceneManager;
+
+    private void Awake()
+    {
+        sceneManager = GameObject.FindWithTag("SceneManager").GetComponent<SceneManagerMultiplayer>();
+
+    }
 
     public void Attract(Rigidbody body, float gravity)
     {
