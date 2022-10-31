@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using System.Collections;
 using System.Text;
+using Cinemachine;
 using Unity.Netcode;
 using UnityEngine.SceneManagement;
 
@@ -14,7 +15,7 @@ public class FirstPersonControllerMultiplayer : NetworkBehaviour
     public float jumpForce = 220;
     public LayerMask groundedMask;
     public SceneManagerMultiplayer sceneManager;
-    public Camera cam;
+    public CinemachineVirtualCamera virtualCamera;
 
     // System vars
     bool grounded = true;
@@ -23,6 +24,8 @@ public class FirstPersonControllerMultiplayer : NetworkBehaviour
     float verticalLookRotation;
     Transform cameraTransform;
     Rigidbody rigidbody;
+    private Vector2 maxFollowoffset = new Vector2(-1f, 6f);
+    private Vector2 cameraVelocity = new Vector2(4f, 0.25f);
 
 
     void Awake()
@@ -83,7 +86,6 @@ public class FirstPersonControllerMultiplayer : NetworkBehaviour
     {
         if (IsOwner)
         {
-            cam.gameObject.SetActive(true);
             enabled = true;
         }
     }
