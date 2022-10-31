@@ -22,10 +22,10 @@ public class FirstPersonControllerMultiplayer : NetworkBehaviour
     Vector3 moveAmount;
     Vector3 smoothMoveVelocity;
     float verticalLookRotation;
-    Transform cameraTransform;
+    //Transform cameraTransform;
     Rigidbody rigidbody;
-    private Vector2 maxFollowoffset = new Vector2(-1f, 6f);
-    private Vector2 cameraVelocity = new Vector2(4f, 0.25f);
+    private Vector2 maxFollowoffset = new Vector2(-1f, 3f);
+    private CinemachineTransposer transposer;
 
 
     void Awake()
@@ -33,7 +33,7 @@ public class FirstPersonControllerMultiplayer : NetworkBehaviour
         sceneManager = GameObject.FindWithTag("SceneManager").GetComponent<SceneManagerMultiplayer>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        cameraTransform = Camera.main.transform;
+        //cameraTransform = Camera.main.transform;
         rigidbody = GetComponent<Rigidbody>();
     }
 
@@ -55,9 +55,16 @@ public class FirstPersonControllerMultiplayer : NetworkBehaviour
 
     private void CameraRotation()
     {
+        /*
         verticalLookRotation += Input.GetAxis("Mouse Y") * mouseSensitivityY;
         verticalLookRotation = Mathf.Clamp(verticalLookRotation, -40, -10);
         cameraTransform.localEulerAngles = Vector3.left * verticalLookRotation;
+        */
+
+        float followOffset = Mathf.Clamp(transposer.m_FollowOffset.y - 
+                                         (Input.GetAxis("Mouse Y") * mouseSensitivityY * Time.deltaTime),
+            maxFollowoffset.x, maxFollowoffset.y);
+        transposer.m_FollowOffset.y = followOffset;
     }
 
     private void Move()
@@ -86,6 +93,8 @@ public class FirstPersonControllerMultiplayer : NetworkBehaviour
     {
         if (IsOwner)
         {
+            transposer = virtualCamera.GetCinemachineComponent<CinemachineTransposer>();
+            virtualCamera.gameObject.SetActive(true);
             enabled = true;
         }
     }
