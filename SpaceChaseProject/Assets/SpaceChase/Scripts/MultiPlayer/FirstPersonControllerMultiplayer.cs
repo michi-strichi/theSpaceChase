@@ -16,6 +16,9 @@ public class FirstPersonControllerMultiplayer : NetworkBehaviour
     public LayerMask groundedMask;
     public SceneManagerMultiplayer sceneManager;
     public CinemachineVirtualCamera virtualCamera;
+    
+    // private vars
+    private NetworkVariable<float> time = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
     // System vars
     bool grounded = true;
@@ -27,6 +30,11 @@ public class FirstPersonControllerMultiplayer : NetworkBehaviour
     private Vector2 maxFollowoffset = new Vector2(-1f, 3f);
     private CinemachineTransposer transposer;
 
+    /* TODO
+     - check collision with other players, if so, enable UI.
+     
+     */
+    
 
     void Awake()
     {
@@ -41,6 +49,10 @@ public class FirstPersonControllerMultiplayer : NetworkBehaviour
     {
         if (sceneManager.IsPlaying())
         {
+            if (IsClient && !IsHost)
+            {
+                time.Value += Time.deltaTime;
+            }
             //Doesn't execute anything if client isn't owner of the script, prevents other players from controlling your character
             if (!IsOwner)
             {
@@ -105,6 +117,11 @@ public class FirstPersonControllerMultiplayer : NetworkBehaviour
         {
             grounded = true;
         }
+
+        if (other.gameObject.CompareTag("Player") && IsClient)
+        {
+            sceneManager.GameOver(time.Value);
+        }
     }
 
     void FixedUpdate()
@@ -117,4 +134,5 @@ public class FirstPersonControllerMultiplayer : NetworkBehaviour
         }
 
     }
+    
 }

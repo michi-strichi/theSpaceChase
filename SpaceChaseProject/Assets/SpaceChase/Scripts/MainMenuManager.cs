@@ -15,6 +15,6 @@ public class MainMenuManager : MonoBehaviour
     public void StartMultiplayer()
     {
         Debug.Log("Started Multiplayer Game");
-        // LOAD MULTIPLAYER SCENE
+        SceneManager.LoadScene("MultiPlayer");
     }
 }
