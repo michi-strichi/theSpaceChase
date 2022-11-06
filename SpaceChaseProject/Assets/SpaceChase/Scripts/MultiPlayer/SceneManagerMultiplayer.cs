@@ -2,33 +2,30 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Netcode;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneManagerMultiplayer : MonoBehaviour
+public class SceneManagerMultiplayer : NetworkBehaviour
 {
-    public float time = 0.0f;
+    //public float time = 0.0f;
     public TextMeshProUGUI timeText;
 
+    
+    
     public GameObject HUD;
     public GameObject GameOverScreen;
     public TextMeshProUGUI scoreText;
-    
 
     private Boolean playing = true;
-    void Awake()
-    {
 
-    }
-    
-    void Update()
+    public void UpdateUI(float time)
     {
-        time += Time.deltaTime;
         timeText.text = time.ToString("F2") + "s";
     }
 
-    public void GameOver()
+    public void GameOver(float time)
     {
         if (playing)
         {

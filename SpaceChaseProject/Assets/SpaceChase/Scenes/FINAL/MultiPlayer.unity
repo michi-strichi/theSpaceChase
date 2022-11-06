@@ -308,11 +308,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
+  near clip plane: 0.1
+  far clip plane: 5000
+  field of view: 40
   orthographic: 0
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -335,8 +335,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 55463867}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.8, y: 16.533058, z: -58.8}
+  m_LocalRotation: {x: 0.07426179, y: -0.024907593, z: 0.0018553857, w: 0.99692595}
+  m_LocalPosition: {x: 2, y: 27.292, z: -19.557}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -617,7 +617,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Score:'
+  m_text: 'Time:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f40fb7e1390e4e648b42ea49a6813979, type: 2}
   m_sharedMaterial: {fileID: 6196563516351349550, guid: f40fb7e1390e4e648b42ea49a6813979, type: 2}
@@ -896,11 +896,6 @@ MonoBehaviour:
     NetworkPrefabs:
     - Override: 0
       Prefab: {fileID: 5601484054515618609, guid: 784d79e0c0e8cbc498b894bd58d250e2, type: 3}
-      SourcePrefabToOverride: {fileID: 0}
-      SourceHashToOverride: 0
-      OverridingTargetPrefab: {fileID: 0}
-    - Override: 0
-      Prefab: {fileID: 6557161206794578027, guid: 86d27325a6f176242936b3be089d76bc, type: 3}
       SourcePrefabToOverride: {fileID: 0}
       SourceHashToOverride: 0
       OverridingTargetPrefab: {fileID: 0}
@@ -1411,6 +1406,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1334381234}
   - component: {fileID: 1334381233}
+  - component: {fileID: 1334381235}
   m_Layer: 0
   m_Name: SceneManager
   m_TagString: SceneManager
@@ -1430,7 +1426,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81cad66521e38b4987f0b319c6beb56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 0
   timeText: {fileID: 333866796}
   HUD: {fileID: 1915751795}
   GameOverScreen: {fileID: 154978879}
@@ -1450,6 +1445,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1334381235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1334381232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3260396661
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &1425008349
 GameObject:
   m_ObjectHideFlags: 0
@@ -1904,7 +1915,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1915751796
 RectTransform:
   m_ObjectHideFlags: 0
