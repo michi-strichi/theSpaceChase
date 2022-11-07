@@ -73,10 +73,12 @@ public class FirstPersonControllerMultiplayer : NetworkBehaviour
         cameraTransform.localEulerAngles = Vector3.left * verticalLookRotation;
         */
 
+    /*
         float followOffset = Mathf.Clamp(transposer.m_FollowOffset.y - 
                                          (Input.GetAxis("Mouse Y") * mouseSensitivityY * Time.deltaTime),
             maxFollowoffset.x, maxFollowoffset.y);
         transposer.m_FollowOffset.y = followOffset;
+        */
     }
 
     private void Move()
