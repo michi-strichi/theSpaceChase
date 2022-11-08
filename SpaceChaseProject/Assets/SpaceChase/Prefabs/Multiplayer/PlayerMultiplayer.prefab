@@ -70,7 +70,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b971f84a26331a047b669d8831d6e976, type: 2}
+  - {fileID: 2100000, guid: 144bcd0f44087944e908d73770454fd4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -152,7 +152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseSensitivityY: 1
   walkSpeed: 6
-  jumpForce: 2500
+  jumpForce: 3000
   groundedMask:
     serializedVersion: 2
     m_Bits: 0
@@ -270,7 +270,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f31bb32f104ceb142b80585c69a210c0, type: 2}
+  - {fileID: 2100000, guid: 2a0602d98aa2ee34cb0df2e76eb9ceea, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

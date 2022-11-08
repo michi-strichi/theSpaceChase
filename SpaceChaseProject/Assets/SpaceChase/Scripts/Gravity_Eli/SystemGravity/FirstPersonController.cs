@@ -4,7 +4,7 @@ using System.Collections;
 using System.Text;
 using UnityEngine.SceneManagement;
 
-[RequireComponent(typeof(GravityBody))]
+
 public class FirstPersonController : MonoBehaviour
 {
     // public vars
@@ -54,7 +54,8 @@ public class FirstPersonController : MonoBehaviour
             {
                 if (grounded)
                 {
-                    rigidbody.AddForce(transform.forward * 2f * jumpForce);
+                    //rigidbody.AddForce(transform.forward * 2f * jumpForce);
+                    rigidbody.AddForce(transform.up * jumpForce);
                     grounded = false;
                 }
             }

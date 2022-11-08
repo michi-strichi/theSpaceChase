@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,16 +25,32 @@ public class GravityBodyNew : MonoBehaviour
         rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
     }
 
+   //uncomment for smoother but snappier movement
+    private void Update()
+    {
+        
+        /*for (int i = 0; i < planets.Length; i++)
+        {
+            _planetsDistance.Add(Vector3.Distance(transform.position, planets[i].transform.position));
+        }
+        
+        
+        float minVal = _planetsDistance.Min();
+        int index = _planetsDistance.IndexOf(minVal);
+        _attractors[index].Reorient(rigidbody);*/
+    }
+
     void FixedUpdate()
     {
         for (int i = 0; i < planets.Length; i++)
         {
             _planetsDistance.Add(Vector3.Distance(transform.position, planets[i].transform.position));
-            _attractors[i].Attract(rigidbody, -1 / _planetsDistance[i] * 750);
         }
+        
         
         float minVal = _planetsDistance.Min();
         int index = _planetsDistance.IndexOf(minVal);
+        _attractors[index].Attract(rigidbody, -1 / _planetsDistance[index]*2000);
         _attractors[index].Reorient(rigidbody);
         _planetsDistance.Clear();
     }

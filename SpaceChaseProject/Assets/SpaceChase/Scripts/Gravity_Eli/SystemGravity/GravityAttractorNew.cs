@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GravityAttractorNew : MonoBehaviour
 {
-    public float mouseSensitivityX = 20;
+    private float mouseSensitivityX = 20;
     public SceneManagerSingleplayer sceneManager;
 
     public void Attract(Rigidbody body, float gravity)
