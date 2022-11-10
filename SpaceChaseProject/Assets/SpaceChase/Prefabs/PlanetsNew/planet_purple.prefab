@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6580893147500985101}
   - component: {fileID: 7853113256181118120}
   - component: {fileID: 5413093311861145698}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: planet_purple
   m_TagString: Untagged
   m_Icon: {fileID: 0}

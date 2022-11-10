@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minSpeed: 5
   maxSpeed: 12
-  perceptionRadius: 10
+  perceptionRadius: 20
   avoidanceRadius: 1
   maxSteerForce: 12
   alignWeight: 2
@@ -25,5 +25,5 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1728
   boundsRadius: 0.27
-  avoidCollisionWeight: 20
+  avoidCollisionWeight: 60
   collisionAvoidDst: 5
