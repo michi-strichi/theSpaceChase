@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6039381441964015804}
   - component: {fileID: 7241765081562025753}
   - component: {fileID: 4871520067093134291}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: planet_pink
   m_TagString: Untagged
   m_Icon: {fileID: 0}
